@@ -5,12 +5,15 @@ html {
 }
 
 body {
-   font-family: 'Open Sans';
-   color: white;
-   min-height: 100%;
-   background: -webkit-radial-gradient(  #2b1339, #380c77);
-   background: radial-gradient(   #2b1339, #380c77);
- }
+  font-family: 'Open Sans';
+  color: white;
+  min-height: 100%;
+/*   background: -webkit-radial-gradient(  #2b1339, #380c77);
+background: radial-gradient(   #2b1339, #380c77);*/
+  background: linear-gradient( 360deg, #2b1339, #380c77 40%, #380d99 );
+/*Voting Scale background: background: linear-gradient( 90deg, #FF0000 8.3%, #FF8000 33.3%, #FFFF00 50%, #AAFF00 66.7%, #55FF00 85%, #00FF00 );*/
+/*Maybe use weTree color scale of brown-yellow-green-blue*/
+}
 
 body.landing {
   background: #5B5579;
