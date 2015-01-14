@@ -105,8 +105,8 @@ require.register("scripts/album", function(exports, require, module) {
    { name: 'Pink', length: '3:21'},
    { name: 'Magenta', length: '2:15'}
    ]
- };
- 
+};
+
  // Another Example Album
  var albumMarconi = {
    name: 'The Telephone',
@@ -121,21 +121,67 @@ require.register("scripts/album", function(exports, require, module) {
    { name: 'Can you hear me now?', length: '3:14' },
    { name: 'Wrong phone number', length: '2:15'}
    ]
- };
+};
 
- var createSongRow = function(songNumber, songName, songLength) {
+var currentlyPlayingSong = null;
+
+var createSongRow = function(songNumber, songName, songLength) {
    var template =
    '<tr>'
-   + '  <td class="col-md-1">' + songNumber + '</td>'
+   + '  <td class="song-number col-md-1" data-song-number="' + songNumber + '">' + songNumber + '</td>'
    + '  <td class="col-md-9">' + songName + '</td>'
    + '  <td class="col-md-2">' + songLength + '</td>'
    + '</tr>'
    ;
    
-   return $(template);
+   // Instead of returning the row immediately, we'll attach hover
+  // functionality to it first.
+  var $row = $(template);
+
+  var onHover = function(event) {
+     var songNumberCell = $(this).find('.song-number');
+     var songNumber = songNumberCell.data('song-number');
+     if (songNumber !== currentlyPlayingSong) {
+         songNumberCell.html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
+      } 
+   };
+
+var offHover = function(event) {
+  var songNumberCell = $(this).find('.song-number');
+  var songNumber = songNumberCell.data('song-number');
+  if (songNumber !== currentlyPlayingSong) {
+      songNumberCell.html(songNumber);
+   }
+};
+
+  // Toggle the play, pause, and song number based on which play/pause button we clicked on.
+   var clickHandler = function(event) {
+   var songNumber = $(this).data('song-number');
+
+   if (currentlyPlayingSong !== null) {
+       // Revert to song number for currently playing song because user started playing new song.
+       var currentlyPlayingCell = $('.song-number[data-song-number="' + currentlyPlayingSong + '"]');
+       currentlyPlayingCell.html(currentlyPlayingSong);
+    }
+
+    if (currentlyPlayingSong !== songNumber) {
+       // Switch from Play -> Pause button to indicate new song is playing.
+       $(this).html('<a class="album-song-button"><i class="fa fa-pause"></i></a>');
+       currentlyPlayingSong = songNumber;
+    }
+    else if (currentlyPlayingSong === songNumber) {
+       // Switch from Pause -> Play button to pause currently playing song.
+       $(this).html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
+       currentlyPlayingSong = null;
+    }
  };
 
- var changeAlbumView = function(album) {
+ $row.find('.song-number').click(clickHandler);
+ $row.hover(onHover, offHover);
+ return $row;
+};
+
+var changeAlbumView = function(album) {
    // Update the album title
    var $albumTitle = $('.album-title');
    $albumTitle.text(album.name);
@@ -160,9 +206,9 @@ require.register("scripts/album", function(exports, require, module) {
      var songData = songs[i];
      var $newRow = createSongRow(i + 1, songData.name, songData.length);
      $songList.append($newRow);
-   }
- };
- 
+  }
+};
+
 // This 'if' condition is used to prevent the jQuery modifications
 // from happening on non-Album view pages.
 //  - Use a regex to validate that the url has "/album" in its path.
@@ -170,7 +216,7 @@ if (document.URL.match(/\/album.html/)) {
  // Wait until the HTML is fully processed.
  $(document).ready(function() {
    changeAlbumView(albumPicasso);
- });
+});
 }
 });
 
