@@ -260,10 +260,15 @@ if (document.URL.match(/\/album.html/)) {
 });
 
 ;require.register("scripts/app", function(exports, require, module) {
-require("./landing");
-require('./collection');
-require('./album');
-require("./profile");
+// require("./landing");
+// require('./collection');
+// require('./album');
+// require("./profile");
+
+ angular.module('BlocJams', []).controller('Landing.controller', ['$scope', function($scope) {
+  console.log("Landing.controller");
+  console.log($scope)
+ }]);
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head ng-app="BlocJams">
   <title>Bloc Jams</title>
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
   <script src="/javascripts/vendor.js"></script>
   <script src="/javascripts/app.js"></script>
   <script>
@@ -14,7 +15,7 @@
  </script>
 </head>
 
-<body class='landing'>
+<body ng-controller='Landing.controller' class='landing'>
   <nav class='player-header-nav navbar'>
     <div class='container'>
       <div class='navbar header'> <!-- Nav Bar -->
