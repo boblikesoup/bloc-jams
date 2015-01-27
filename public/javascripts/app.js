@@ -283,7 +283,7 @@ blocJams = angular.module('BlocJams', ['ui.router']);
 
 //arguments in paranthesis are imported modules for ui-router and urls
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider){
-  //prevent hashbangs #! in url ex: fsdfsd/#!/albume.html
+  //prevent hashbangs #! in url ex: fsdfsd/#!/album.html
   $locationProvider.html5Mode(true);
 
   $stateProvider.state('landing', {
@@ -333,7 +333,7 @@ blocJams.controller('Collection.controller', ['$scope', function($scope) {
  $scope.albums = [];
  for (var i = 0; i < 33; i++) {
    $scope.albums.push(angular.copy(albumPicasso));
- }
+ };
 }]);
 });
 
