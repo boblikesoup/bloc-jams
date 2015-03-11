@@ -449,8 +449,8 @@ blocJams.directive('slider', function(){
 	}
 
 	return {
-    	templateUrl: '/templates/directives/slider.html', // We'll create these files shortly.
-    	replace: true,
+    	templateUrl: '/templates/directives/slider.html',
+       	replace: true,
     	restrict: 'E',
     	link: function(scope, element, attributes) {
     		
